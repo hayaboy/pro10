@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
+//@WebServlet("/login")
 public class LoginTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
+	//접속한 사용자들을 저장하는 범위는 애플리케이션 범위이므로 컨텍스트에 저장
 	ServletContext context=null;
 	ArrayList userLists= new ArrayList();
 	

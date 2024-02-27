@@ -1,7 +1,8 @@
-package sec04.ex01;
+package sec04.ex02;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-//@WebServlet("/logout")
+@WebServlet("/logout")
 public class LogoutTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ServletContext context=null;
@@ -29,7 +30,7 @@ public class LogoutTest extends HttpServlet {
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("여기는 로그아웃");
 		context =getServletContext();
-	
+		PrintWriter out = response.getWriter();
 		String user_id =request.getParameter("user_id");
 		
 		System.out.println("로그아웃 한 가져온 id"  + user_id );
@@ -38,27 +39,19 @@ public class LogoutTest extends HttpServlet {
 		HttpSession  session=request.getSession();
 		session.invalidate();
 		
-		ArrayList userLists2=(ArrayList) context.getAttribute("userLists");
+		List user_list=(List) context.getAttribute("user_list");
+		user_list.remove(user_id);
 		
-
-		System.out.println(userLists2.remove(user_id));
-//		System.out.println(userLists2.remove(new LoginImpl(user_id)));
+		//컨텍스트에서 삭제후 다시 설정
+		context.removeAttribute("user_list");
+		context.setAttribute("user_list", user_list);
 		
-		System.out.println("세션 소멸");
-		
-	
-		
-		//컨텍스트에서 다시 셋팅
-		
-		context.removeAttribute("userLists");
-		
-		context.setAttribute("userLists2",userLists2 );
-		
-		for(Object user : userLists2) {
-			System.out.println(user);
+		for (int i = 0; i < user_list.size(); i++) {
+			out.println(user_list.get(i) + "<br>");
 		}
 		
 		
+		out.println("<br>로그아웃 했습니다.");
 	}
 	
 

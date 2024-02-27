@@ -1,4 +1,4 @@
-package sec04.ex01;
+package sec04.ex02;
 
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
