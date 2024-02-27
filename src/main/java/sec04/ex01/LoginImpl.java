@@ -41,4 +41,16 @@ public class LoginImpl implements HttpSessionBindingListener {
 		System.out.println("사용자 접속");
 		total_user--;
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		
+		return user_id;
+	}
+	
+	
+	
+	
 }
